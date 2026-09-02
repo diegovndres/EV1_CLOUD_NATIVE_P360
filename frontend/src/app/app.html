@@ -340,5 +340,11 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+@if (isLoggedIn) {
+  <button (click)="logout()">Cerrar sesión</button>
+} @else {
+  <button (click)="login()">Iniciar sesión</button>
+}
 
-<router-outlet />
+<router-outlet></router-outlet>
+
