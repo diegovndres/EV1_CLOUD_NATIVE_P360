@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 
@@ -9,7 +9,7 @@ import { MsalService } from '@azure/msal-angular';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  protected readonly title = signal('frontend');
+  protected title = 'frontend';
 
   constructor(private msalService: MsalService) {}
 
@@ -19,17 +19,5 @@ export class App implements OnInit {
         // Login procesado (si venía de un redirect de Azure AD)
       });
     });
-  }
-
-  get isLoggedIn(): boolean {
-    return this.msalService.instance.getAllAccounts().length > 0;
-  }
-
-  login(): void {
-    this.msalService.loginRedirect();
-  }
-
-  logout(): void {
-    this.msalService.logoutRedirect();
   }
 }
