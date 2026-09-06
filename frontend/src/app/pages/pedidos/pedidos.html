@@ -1,107 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedidos360</title>
-  <link rel="stylesheet" href="pedidos.css">
-</head>
-<body>
-
-  <header class="navbar">
-    <div class="navbar-brand">
-      <span class="logo-dot"></span>
-      <h1>Pedidos<span>360</span></h1>
+<header class="navbar">
+  <div class="navbar-brand">
+    <span class="logo-dot"></span>
+    <h1>Pedidos<span>360</span></h1>
+  </div>
+  <nav class="navbar-links">
+    <a href="#" class="active">Dashboard</a>
+    <a href="#">Pedidos</a>
+    <a href="#">Clientes</a>
+    <a href="#">Reportes</a>
+  </nav>
+  <button class="btn-primary">+ Nuevo pedido</button>
+</header>
+<main class="container">
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Pedidos</h2>
+      <input type="text" class="search-input" placeholder="Buscar pedido...">
     </div>
-    <nav class="navbar-links">
-      <a href="#" class="active">Dashboard</a>
-      <a href="#">Pedidos</a>
-      <a href="#">Clientes</a>
-      <a href="#">Reportes</a>
-    </nav>
-    <button class="btn-primary">+ Nuevo pedido</button>
-  </header>
-
-  <main class="container">
-
-    <section class="stats-grid">
-      <div class="stat-card">
-        <p class="stat-label">Pedidos hoy</p>
-        <p class="stat-value">128</p>
-        <span class="stat-trend up">+12%</span>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Pendientes</p>
-        <p class="stat-value">34</p>
-        <span class="stat-trend down">-4%</span>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Completados</p>
-        <p class="stat-value">89</p>
-        <span class="stat-trend up">+8%</span>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Ingresos</p>
-        <p class="stat-value">$4,520</p>
-        <span class="stat-trend up">+21%</span>
-      </div>
-    </section>
-
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Pedidos recientes</h2>
-        <input type="text" class="search-input" placeholder="Buscar pedido...">
-      </div>
-
-      <table class="orders-table">
-        <thead>
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of pedidos; track p.id) {
           <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Total</th>
+            <td>#{{ p.id }}</td>
+            <td>{{ p.cliente }}</td>
+            <td>{{ p.producto }}</td>
+            <td>{{ p.cantidad }}</td>
+            <td>{{ p.fecha }}</td>
+            <td><span class="badge">{{ p.estado }}</span></td>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>#3021</td>
-            <td>Marcela Rojas</td>
-            <td>Pack promocional x3</td>
-            <td>04 Sep 2026</td>
-            <td><span class="badge badge-success">Entregado</span></td>
-            <td>$45.000</td>
-          </tr>
-          <tr>
-            <td>#3022</td>
-            <td>Juan Pérez</td>
-            <td>Kit oficina</td>
-            <td>04 Sep 2026</td>
-            <td><span class="badge badge-warning">En camino</span></td>
-            <td>$28.500</td>
-          </tr>
-          <tr>
-            <td>#3023</td>
-            <td>Camila Soto</td>
-            <td>Producto individual</td>
-            <td>03 Sep 2026</td>
-            <td><span class="badge badge-pending">Pendiente</span></td>
-            <td>$12.990</td>
-          </tr>
-          <tr>
-            <td>#3024</td>
-            <td>Pedro Muñoz</td>
-            <td>Pack familiar</td>
-            <td>03 Sep 2026</td>
-            <td><span class="badge badge-danger">Cancelado</span></td>
-            <td>$60.000</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-  </main>
-
-</body>
-</html>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>

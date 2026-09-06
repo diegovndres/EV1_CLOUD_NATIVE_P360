@@ -15,8 +15,15 @@ export class App implements OnInit {
 
   ngOnInit(): void {
     this.msalService.instance.initialize().then(() => {
-      this.msalService.instance.handleRedirectPromise().then(() => {
-        // Login procesado (si venía de un redirect de Azure AD)
+      this.msalService.instance.handleRedirectPromise().then((response) => {
+        if (response && response.account) {
+          this.msalService.instance.setActiveAccount(response.account);
+        } else {
+          const accounts = this.msalService.instance.getAllAccounts();
+          if (accounts.length > 0) {
+            this.msalService.instance.setActiveAccount(accounts[0]);
+          }
+        }
       });
     });
   }
