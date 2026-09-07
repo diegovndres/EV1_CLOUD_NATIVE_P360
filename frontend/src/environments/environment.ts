@@ -10,5 +10,19 @@ export const environment = {
   apiConfig: {
     scopes: ['api://ac0cd280-33b6-4d33-ae42-aa056c7029fa/access_as_user'],
     uri: 'http://localhost:8081'
+  },
+
+  system: {
+    loggerOptions: {
+      loggerCallback: (level: any, message: string) => {
+       console.log(message);
+      },
+
+      logLevel: 3, // Verbose
+
+      piiLoggingEnabled: false
+
+    } 
   }
-};
+
+}
