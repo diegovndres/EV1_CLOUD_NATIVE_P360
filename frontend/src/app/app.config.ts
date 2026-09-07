@@ -39,7 +39,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 // Config del interceptor: adjunta el token JWT a las llamadas hacia tu API
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set(environment.apiConfig.uri, environment.apiConfig.scopes);
+ 
+  // CORRECCIÓN: Agregar '/*' para que intercepte todas las subrutas (ej: /api/pedidos)
+  protectedResourceMap.set(`${environment.apiConfig.uri}/*`, environment.apiConfig.scopes);
 
   return {
     interactionType: InteractionType.Redirect,
