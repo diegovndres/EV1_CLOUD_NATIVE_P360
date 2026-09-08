@@ -1,17 +1,17 @@
 import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { PedidosService } from '../../services/pedidos';
 
 @Component({
   selector: 'app-pedidos',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './pedidos.html',
   styleUrl: './pedidos.css',
 })
 export class Pedidos implements OnInit {
   pedidos: any[] = [];
 
-  // Reemplazamos el constructor por la función inject()
   private pedidosService = inject(PedidosService);
   private cdr = inject(ChangeDetectorRef);
 
@@ -19,7 +19,7 @@ export class Pedidos implements OnInit {
     this.pedidosService.listar().subscribe({
       next: (data) => {
         this.pedidos = data;
-        this.cdr.detectChanges(); // Obliga a Angular a dibujar la tabla con los datos
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al obtener los datos:', err)
     });

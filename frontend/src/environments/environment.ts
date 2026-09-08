@@ -9,7 +9,11 @@ export const environment = {
   },
   apiConfig: {
     scopes: ['api://ac0cd280-33b6-4d33-ae42-aa056c7029fa/access_as_user'],
-    uri: 'http://localhost:8081'
+    uri: 'http://localhost:8081',
+    pedidosUri: 'http://localhost:8081',
+    productosUri: 'http://localhost:8082',
+    clientesUri: 'http://localhost:8083',
+    notificacionesUri: 'http://localhost:8084'
   },
 
   system: {

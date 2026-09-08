@@ -1,0 +1,48 @@
+<header class="navbar">
+  <div class="navbar-brand">
+    <span class="logo-dot"></span>
+    <h1>Pedidos<span>360</span></h1>
+  </div>
+  <nav class="navbar-links">
+    <a routerLink="/home" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/pedidos" routerLinkActive="active">Pedidos</a>
+    <a routerLink="/productos" routerLinkActive="active">Productos</a>
+    <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
+    <a routerLink="/notificaciones" routerLinkActive="active">Notificaciones</a>
+  </nav>
+  <button class="btn-primary">+ Nuevo cliente</button>
+</header>
+<main class="container">
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Clientes</h2>
+      <input type="text" class="search-input" placeholder="Buscar cliente...">
+    </div>
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of clientes; track c.id) {
+          <tr>
+            <td>#{{ c.id }}</td>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.email }}</td>
+            <td>{{ c.telefono }}</td>
+            <td>{{ c.direccion }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" class="empty-row">No hay clientes registrados.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>

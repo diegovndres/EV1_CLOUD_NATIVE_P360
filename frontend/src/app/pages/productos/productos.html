@@ -10,45 +10,40 @@
     <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
     <a routerLink="/notificaciones" routerLinkActive="active">Notificaciones</a>
   </nav>
-  <button class="btn-primary">+ Nuevo pedido</button>
+  <button class="btn-primary">+ Nuevo producto</button>
 </header>
 <main class="container">
   <section class="panel">
     <div class="panel-header">
-      <h2>Pedidos</h2>
-      <input type="text" class="search-input" placeholder="Buscar pedido...">
+      <h2>Productos</h2>
+      <input type="text" class="search-input" placeholder="Buscar producto...">
     </div>
     <table class="orders-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Cliente</th>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Fecha</th>
-          <th>Estado</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Stock</th>
         </tr>
       </thead>
       <tbody>
-        @for (p of pedidos; track p.id) {
+        @for (p of productos; track p.id) {
           <tr>
             <td>#{{ p.id }}</td>
-            <td>{{ p.cliente }}</td>
-            <td>{{ p.producto }}</td>
-            <td>{{ p.cantidad }}</td>
-            <td>{{ p.fecha }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.descripcion }}</td>
+            <td>${{ p.precio }}</td>
             <td>
-              <span class="badge"
-                    [class.badge-success]="p.estado === 'Entregado'"
-                    [class.badge-danger]="p.estado === 'Cancelado'"
-                    [class.badge-warning]="p.estado === 'Pendiente'">
-                {{ p.estado }}
+              <span class="badge" [class.badge-danger]="p.stock === 0" [class.badge-success]="p.stock > 0">
+                {{ p.stock }}
               </span>
             </td>
           </tr>
         } @empty {
           <tr>
-            <td colspan="6" class="empty-row">No hay pedidos registrados.</td>
+            <td colspan="5" class="empty-row">No hay productos registrados.</td>
           </tr>
         }
       </tbody>

@@ -10,45 +10,36 @@
     <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
     <a routerLink="/notificaciones" routerLinkActive="active">Notificaciones</a>
   </nav>
-  <button class="btn-primary">+ Nuevo pedido</button>
+  <button class="btn-primary">+ Nueva notificación</button>
 </header>
 <main class="container">
   <section class="panel">
     <div class="panel-header">
-      <h2>Pedidos</h2>
-      <input type="text" class="search-input" placeholder="Buscar pedido...">
+      <h2>Notificaciones</h2>
+      <input type="text" class="search-input" placeholder="Buscar notificación...">
     </div>
     <table class="orders-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Cliente</th>
-          <th>Producto</th>
-          <th>Cantidad</th>
+          <th>Mensaje</th>
+          <th>Destinatario</th>
           <th>Fecha</th>
           <th>Estado</th>
         </tr>
       </thead>
       <tbody>
-        @for (p of pedidos; track p.id) {
+        @for (n of notificaciones; track n.id) {
           <tr>
-            <td>#{{ p.id }}</td>
-            <td>{{ p.cliente }}</td>
-            <td>{{ p.producto }}</td>
-            <td>{{ p.cantidad }}</td>
-            <td>{{ p.fecha }}</td>
-            <td>
-              <span class="badge"
-                    [class.badge-success]="p.estado === 'Entregado'"
-                    [class.badge-danger]="p.estado === 'Cancelado'"
-                    [class.badge-warning]="p.estado === 'Pendiente'">
-                {{ p.estado }}
-              </span>
-            </td>
+            <td>#{{ n.id }}</td>
+            <td>{{ n.mensaje }}</td>
+            <td>{{ n.destinatario }}</td>
+            <td>{{ n.fecha }}</td>
+            <td><span class="badge">{{ n.estado }}</span></td>
           </tr>
         } @empty {
           <tr>
-            <td colspan="6" class="empty-row">No hay pedidos registrados.</td>
+            <td colspan="5" class="empty-row">No hay notificaciones registradas.</td>
           </tr>
         }
       </tbody>

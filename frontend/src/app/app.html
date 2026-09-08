@@ -1,7 +1,7 @@
 @if (isLoggedIn) {
-  <button (click)="logout()">Cerrar sesión</button>
+  <button class="btn-logout" (click)="logout()">Cerrar sesión</button>
 } @else {
-  <button (click)="login()">Iniciar sesión</button>
+  <button class="btn-logout" (click)="login()">Iniciar sesión</button>
 }
 
 <router-outlet></router-outlet>

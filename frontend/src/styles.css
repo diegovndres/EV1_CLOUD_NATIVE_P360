@@ -1,0 +1,228 @@
+/* ===== Variables generales ===== */
+:root {
+  --amarillo: #ffc107;
+  --amarillo-oscuro: #e6ac00;
+  --negro: #1a1a1a;
+  --negro-suave: #2b2b2b;
+  --gris-claro: #f4f4f4;
+  --blanco: #ffffff;
+  --exito: #2ecc71;
+  --peligro: #e74c3c;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--negro);
+  padding: 0.8rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 3px solid var(--amarillo);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-dot {
+  width: 14px;
+  height: 14px;
+  background-color: var(--amarillo);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--amarillo);
+}
+
+.navbar-brand h1 {
+  color: var(--blanco);
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.navbar-brand h1 span {
+  color: var(--amarillo);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  color: var(--gris-claro);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.navbar-links a:hover {
+  color: var(--negro);
+  background-color: var(--amarillo);
+}
+
+.navbar-links a.active {
+  color: var(--negro);
+  background-color: var(--amarillo);
+  font-weight: 700;
+}
+
+.btn-primary {
+  background-color: var(--amarillo);
+  color: var(--negro);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--amarillo-oscuro);
+  transform: translateY(-2px);
+}
+
+/* ===== Fondo general de la app ===== */
+body {
+  background-color: var(--gris-claro);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  color: var(--negro);
+}
+
+/* ===== Contenedor principal (usado en todas las páginas) ===== */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.panel {
+  background-color: var(--blanco);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border-top: 4px solid var(--amarillo);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  background-color: var(--negro-suave);
+}
+
+.panel-header h2 {
+  color: var(--amarillo);
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 240px;
+  background-color: var(--blanco);
+  color: var(--negro);
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 2px var(--amarillo);
+}
+
+/* ===== Tabla genérica (usada en productos, pedidos, clientes, etc.) ===== */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table thead {
+  background-color: var(--negro);
+}
+
+.orders-table th {
+  color: var(--amarillo);
+  text-align: left;
+  padding: 0.9rem 1.2rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.orders-table td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.orders-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #fff8e1;
+}
+
+.orders-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.empty-row {
+  text-align: center;
+  color: #999;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* ===== Badges (usados en cualquier tabla de cualquier página) ===== */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--blanco);
+  background-color: #999;
+}
+
+.badge-success {
+  background-color: var(--exito);
+}
+
+.badge-danger {
+  background-color: var(--peligro);
+}
+
+.badge-warning {
+  background-color: #f39c12;
+}
+
+/* ===== Botón cerrar/iniciar sesión (posicionado sobre el navbar) ===== */
+.btn-logout {
+  position: fixed;
+  top: 14px;
+  left: 200px;
+  z-index: 1000;
+  background-color: transparent;
+  color: var(--amarillo);
+  border: 1.5px solid var(--amarillo);
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: var(--amarillo);
+  color: var(--negro);
+}
