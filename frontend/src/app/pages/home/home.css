@@ -2,63 +2,125 @@
    PANTALLA DE LOGIN (se muestra cuando NO hay sesión)
    ============================================ */
 .login-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
   min-height: 100vh;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background-color: var(--gris-claro);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
-.login-card {
-  flex: 1;
-  max-width: 480px;
+/* ---------- Panel izquierdo: relato de marca ---------- */
+.login-story {
+  background-color: #14120f;
+  color: #f4f1ea;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 48px;
-  background-color: var(--blanco);
+  padding: 4rem 4.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.login-brand {
+.story-mark {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
 }
 
-.login-brand h1 {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--negro);
+.story-mark-text {
+  font-family: 'Sora', 'Segoe UI', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #f4f1ea;
 }
 
-.login-brand h1 span {
+.story-mark-text em {
+  font-style: normal;
   color: var(--amarillo);
 }
 
-.login-subtitle {
-  font-size: 13px;
-  color: #6b7280;
-  margin-bottom: 24px;
-}
-
-.login-divider {
-  height: 1px;
-  background-color: #e5e7eb;
-  margin-bottom: 32px;
-}
-
-.login-content h2 {
-  font-size: 24px;
+.story-headline {
+  font-family: 'Sora', 'Segoe UI', sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--negro);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.4rem;
+  max-width: 11ch;
 }
 
-.login-description {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 28px;
-  line-height: 1.5;
+.story-copy {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #a39d8e;
+  max-width: 34ch;
+  margin: 0 0 3.5rem;
+}
+
+.story-crate {
+  width: 220px;
+  height: auto;
+  align-self: flex-start;
+}
+
+.crate-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 620;
+  stroke-dashoffset: 620;
+  animation: draw-crate 1.4s ease-out forwards;
+}
+
+.crate-accent {
+  animation-delay: 0.15s;
+}
+
+@keyframes draw-crate {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crate-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- Panel derecho: acceso ---------- */
+.login-access {
+  background-color: #faf9f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.access-inner {
+  width: 100%;
+  max-width: 360px;
+}
+
+.access-eyebrow {
+  font-size: 0.82rem;
+  color: #8a8377;
+  margin: 0 0 0.5rem;
+}
+
+.access-title {
+  font-family: 'Sora', 'Segoe UI', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #14120f;
+  margin: 0 0 0.7rem;
+}
+
+.access-copy {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #6b6558;
+  margin: 0 0 2.2rem;
 }
 
 .btn-microsoft {
@@ -67,80 +129,51 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background-color: var(--blanco);
-  color: var(--negro);
-  border: 1px solid #e5e7eb;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 14px;
+  background-color: #14120f;
+  color: #faf9f6;
+  border: none;
+  padding: 0.85rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .btn-microsoft:hover {
-  border-color: var(--amarillo);
-  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.25);
+  background-color: #2b271f;
+  transform: translateY(-1px);
+}
+
+.btn-microsoft:focus-visible {
+  outline: 2px solid var(--amarillo);
+  outline-offset: 2px;
 }
 
 .ms-icon {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
 }
 
-.login-footer {
-  margin-top: 48px;
+.access-footer {
+  margin-top: 2.5rem;
+  font-size: 0.78rem;
+  color: #a39d8e;
 }
 
-.login-footer p {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.login-side-panel {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--negro) 0%, var(--negro-suave) 100%);
-  padding: 48px;
-}
-
-.side-content {
-  max-width: 420px;
-  color: var(--blanco);
-}
-
-.side-content h2 {
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 16px;
-}
-
-.side-content h2::after {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 4px;
-  background-color: var(--amarillo);
-  margin-top: 16px;
-  border-radius: 4px;
-}
-
-.side-content p {
-  font-size: 15px;
-  opacity: 0.8;
-  line-height: 1.6;
-  margin-top: 20px;
-}
-
-@media (max-width: 900px) {
-  .login-side-panel {
+@media (max-width: 860px) {
+  .login-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .login-story {
+    padding: 3rem 2rem;
+  }
+  .story-crate {
     display: none;
   }
-  .login-card {
-    max-width: 100%;
+  .login-access {
+    padding: 2.5rem 2rem;
   }
 }
 
