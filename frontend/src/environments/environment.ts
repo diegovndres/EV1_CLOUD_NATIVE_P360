@@ -9,24 +9,19 @@ export const environment = {
   },
   apiConfig: {
     scopes: ['api://ac0cd280-33b6-4d33-ae42-aa056c7029fa/access_as_user'],
-    uri: 'http://localhost:8081',
-    pedidosUri: 'http://localhost:8081',
-    productosUri: 'http://localhost:8082',
-    clientesUri: 'http://localhost:8083',
-    notificacionesUri: 'http://localhost:8084'
+    uri: 'https://wrxinrzh5h.execute-api.us-east-1.amazonaws.com/pedidos',
+    pedidosUri: 'https://wrxinrzh5h.execute-api.us-east-1.amazonaws.com/pedidos',
+    productosUri: 'https://wrxinrzh5h.execute-api.us-east-1.amazonaws.com/productos',
+    clientesUri: 'https://wrxinrzh5h.execute-api.us-east-1.amazonaws.com/clientes',
+    notificacionesUri: 'https://wrxinrzh5h.execute-api.us-east-1.amazonaws.com/notificaciones'
   },
-
   system: {
     loggerOptions: {
       loggerCallback: (level: any, message: string) => {
-       console.log(message);
+        console.log(message);
       },
-
       logLevel: 3, // Verbose
-
       piiLoggingEnabled: false
-
-    } 
+    }
   }
-
 }
