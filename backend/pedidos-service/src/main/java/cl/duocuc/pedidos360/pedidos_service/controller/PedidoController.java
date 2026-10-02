@@ -1,5 +1,6 @@
 package cl.duocuc.pedidos360.pedidos_service.controller;
 
+import cl.duocuc.pedidos360.pedidos_service.messaging.producer.PedidoEventPublisher;
 import cl.duocuc.pedidos360.pedidos_service.model.Pedido;
 import cl.duocuc.pedidos360.pedidos_service.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class PedidoController {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private PedidoEventPublisher pedidoEventPublisher;
+
     @GetMapping
     public List<Pedido> listar() {
         return pedidoRepository.findAll();
@@ -21,6 +25,8 @@ public class PedidoController {
 
     @PostMapping
     public Pedido crear(@RequestBody Pedido pedido) {
-        return pedidoRepository.save(pedido);
+        Pedido guardado = pedidoRepository.save(pedido);
+        pedidoEventPublisher.publicarPedidoCreado(guardado);
+        return guardado;
     }
 }
