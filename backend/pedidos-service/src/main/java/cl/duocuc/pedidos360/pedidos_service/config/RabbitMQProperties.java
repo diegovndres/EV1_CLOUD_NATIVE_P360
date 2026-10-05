@@ -1,4 +1,4 @@
-package cl.duocuc.pedidos360.pedidos_service.conifg;
+package cl.duocuc.pedidos360.pedidos_service.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
