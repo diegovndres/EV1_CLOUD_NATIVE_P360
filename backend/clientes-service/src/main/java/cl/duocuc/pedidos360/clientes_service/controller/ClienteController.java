@@ -1,5 +1,6 @@
 package cl.duocuc.pedidos360.clientes_service.controller;
 
+import cl.duocuc.pedidos360.clientes_service.messaging.producer.ClienteEventPublisher;
 import cl.duocuc.pedidos360.clientes_service.model.Cliente;
 import cl.duocuc.pedidos360.clientes_service.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ClienteEventPublisher clienteEventPublisher;
+
     @GetMapping
     public List<Cliente> listar() {
         return clienteRepository.findAll();
@@ -21,6 +25,8 @@ public class ClienteController {
 
     @PostMapping
     public Cliente crear(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+        Cliente guardado = clienteRepository.save(cliente);
+        clienteEventPublisher.publicarClienteCreado(guardado);
+        return guardado;
     }
 }

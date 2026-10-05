@@ -1,4 +1,4 @@
-package cl.duocuc.pedidos360.pedidos_service.config;
+package cl.duocuc.pedidos360.clientes_service.config;
 
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
@@ -23,7 +23,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public TopicExchange pedidosExchange() {
-        return new TopicExchange(props.pedidosExchange(), true, false);
+    public TopicExchange clientesExchange() {
+        return new TopicExchange(props.clientesExchange(), true, false);
     }
 }
