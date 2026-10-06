@@ -1,0 +1,55 @@
+package cl.duocuc.pedidos360.notificaciones_service.service;
+
+import cl.duocuc.pedidos360.notificaciones_service.messaging.MensajeNoProcesableException;
+import cl.duocuc.pedidos360.notificaciones_service.messaging.event.ClienteCreadoEvent;
+import cl.duocuc.pedidos360.notificaciones_service.messaging.event.PedidoCreadoEvent;
+import cl.duocuc.pedidos360.notificaciones_service.model.Notificacion;
+import cl.duocuc.pedidos360.notificaciones_service.repository.NotificacionRepository;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+
+@Service
+public class NotificacionService {
+
+    private final NotificacionRepository notificacionRepository;
+
+    public NotificacionService(NotificacionRepository notificacionRepository) {
+        this.notificacionRepository = notificacionRepository;
+    }
+
+    public Notificacion notificarPedido(PedidoCreadoEvent e) {
+        validar(e);
+        return guardar("Tu pedido #" + e.pedidoId() + " (" + e.cantidad() + " x " + e.producto() + ") fue registrado",
+                e.cliente(), "ENVIADA");
+    }
+
+    public Notificacion generarTicket(PedidoCreadoEvent e) {
+        validar(e);
+        String ticket = String.format("TCK-%06d", e.pedidoId());
+        return guardar("Ticket " + ticket + " | Cliente: " + e.cliente() + " | " + e.cantidad() + " x " + e.producto(),
+                e.cliente(), "TICKET_GENERADO");
+    }
+
+    public Notificacion notificarCliente(ClienteCreadoEvent e) {
+        if (e == null || e.clienteId() == null || e.email() == null || e.email().isBlank()) {
+            throw new MensajeNoProcesableException("Evento de cliente invalido (falta id o email)");
+        }
+        return guardar("Bienvenido/a " + e.nombre() + ", tu cuenta fue creada", e.email(), "ENVIADA");
+    }
+
+    private void validar(PedidoCreadoEvent e) {
+        if (e == null || e.pedidoId() == null || e.cliente() == null || e.cliente().isBlank()) {
+            throw new MensajeNoProcesableException("Evento de pedido invalido (falta id o cliente)");
+        }
+    }
+
+    private Notificacion guardar(String mensaje, String destinatario, String estado) {
+        Notificacion n = new Notificacion();
+        n.setMensaje(mensaje);
+        n.setDestinatario(destinatario);
+        n.setEstado(estado);
+        n.setFecha(LocalDate.now());
+        return notificacionRepository.save(n);
+    }
+}

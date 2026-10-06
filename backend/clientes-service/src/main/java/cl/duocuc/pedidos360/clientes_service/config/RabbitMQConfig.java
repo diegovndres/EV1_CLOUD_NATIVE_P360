@@ -1,8 +1,10 @@
 package cl.duocuc.pedidos360.clientes_service.config;
 
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,5 +27,10 @@ public class RabbitMQConfig {
     @Bean
     public TopicExchange clientesExchange() {
         return new TopicExchange(props.clientesExchange(), true, false);
+    }
+
+    @Bean
+    public ApplicationRunner declararTopologiaAlIniciar(ConnectionFactory connectionFactory) {
+        return args -> connectionFactory.createConnection().close();
     }
 }
