@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
 @EnableConfigurationProperties(RabbitMQProperties.class)
@@ -115,5 +117,24 @@ public class RabbitMQConfig {
     @Bean
     public Binding notificacionClienteDlqBinding() {
         return BindingBuilder.bind(notificacionClienteDlq()).to(deadLetterExchange()).with(props.queueNotificacionClienteDlq());
+    }
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
+            ConnectionFactory connectionFactory,
+            MessageConverter messageConverter,
+            @Value("${app.rabbitmq.listener.prefetch:10}") int prefetch,
+            @Value("${app.rabbitmq.listener.concurrency:2}") int concurrency,
+            @Value("${app.rabbitmq.listener.max-concurrency:4}") int maxConcurrency) {
+
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(messageConverter);
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        factory.setDefaultRequeueRejected(false);
+        factory.setPrefetchCount(prefetch);
+        factory.setConcurrentConsumers(concurrency);
+        factory.setMaxConcurrentConsumers(maxConcurrency);
+        return factory;
     }
 }
